@@ -1,4 +1,4 @@
-import '../../../assets/stylesheets/welcome/welcomeCircle.scss';
+import '../../../assets/stylesheets/home/welcomeCircle.scss';
 import Badge from '@material-ui/core/Badge';
 import QuestionAnswerIconOutlined from '@material-ui/icons/QuestionAnswerOutlined';
 import CloseIcon from '@material-ui/icons/Close';

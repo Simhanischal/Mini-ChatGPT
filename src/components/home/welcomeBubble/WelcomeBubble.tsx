@@ -1,5 +1,5 @@
 import Cancel from '@material-ui/icons/cancel';
-import '../../../assets/home/WelcomeBubble.scss';
+import '../../../assets/stylesheets/home/WelcomeBubble.scss';
 
 interface WelcomeBubbleProps {
     welcomeMessage: string;
@@ -8,7 +8,6 @@ interface WelcomeBubbleProps {
 }
 
 const WelcomeBubble = ({ welcomeMessage, closeWelcomeMessage, handleChangeIcon }: WelcomeBubbleProps) => {
-    //if welcomeMessage is true, show the welcome bubble, else, hide it
     return (
         welcomeMessage && <>
             <Cancel
