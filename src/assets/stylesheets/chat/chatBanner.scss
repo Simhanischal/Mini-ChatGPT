@@ -1,0 +1,25 @@
+.banner {
+  background-color: #5851db;
+  z-index: 100;
+  color: #ffffff;
+  width: 370px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.bannerAvatar {
+  width: fit-content;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background-color: #ffffff;
+  padding: 2px 4px;
+  margin-left: 20px;
+}
+
+.bannerBotDetails {
+  line-height: 1px;
+  padding-left: 10px;
+}

@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      Initial Setup!
+     Initial Setup!
     </>
   )
 }
