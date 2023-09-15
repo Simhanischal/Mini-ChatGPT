@@ -1,0 +1,9 @@
+.welcome-container {
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    /*for mobile dispalys*/
+    @media (max-width: 600px){
+        right: 0;
+    }
+}
