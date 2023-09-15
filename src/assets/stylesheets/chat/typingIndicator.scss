@@ -1,0 +1,47 @@
+.container {
+  width: 370px;
+  height: 30px;
+  background-color: #5851DB;
+  color: #FFFFFF;
+  font-size: 13px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: perspective(100px)rotate(0deg)
+  }
+  16.667% {
+    transform: perspective(100px)rotateX(180deg)rotateY(0);
+  }
+  33.333% {
+    transform: perspective(100px)rotateX(180deg)rotateY(180deg);
+  }
+  50% {
+    transform: perspective(100px)rotateX(0)rotateY(180deg);
+  }
+  66.667% {
+    transform: perspective(100px)rotateX(0)rotateY(0);
+  }
+  100% {
+    transform: perspective(100px)rotateX(0)rotateY(0);
+  }
+}
+
+.chatAvatar {
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  padding: 3px 4px;
+  margin-left: 10px;
+  width: 15px;
+  vertical-align: middle;
+  animation: spin 3s;
+  animation-iteration-count: infinite;
+}
+
+#text {
+  margin-left: 10px;
+}
