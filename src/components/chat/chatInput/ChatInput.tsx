@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import '../../../assets/stylesheets/chat/chatInput.scss';
 
 interface ChatInputProps {
   input: string;
-  inputRef: any;
+  inputRef: React.RefObject<HTMLTextAreaElement>;
   handleInputChange: () => void;
   handleEnter: () => void;
   handleSend: () => void;
@@ -20,8 +20,8 @@ const ChatInput = (props: ChatInputProps) => {
     //this case is being handled because of keyboard popping up
     //in mobile devices as soon as the text area is focused
     if (window.screen.width > 500)
-      inputRef.current.focus();
-  }, [inputRef]);
+      inputRef.current?.focus();
+  });
 
   return (
     <>
