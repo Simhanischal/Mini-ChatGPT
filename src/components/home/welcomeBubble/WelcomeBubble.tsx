@@ -1,4 +1,4 @@
-import Cancel from '@material-ui/icons/cancel';
+import CancelIcon from '@mui/icons-material/Cancel';
 import '../../../assets/stylesheets/home/WelcomeBubble.scss';
 
 interface WelcomeBubbleProps {
@@ -10,7 +10,7 @@ interface WelcomeBubbleProps {
 const WelcomeBubble = ({ welcomeMessage, closeWelcomeMessage, handleChangeIcon }: WelcomeBubbleProps) => {
   return (
     welcomeMessage && <>
-      <Cancel
+      <CancelIcon
         className='cancel'
         id='cancel'
         fontSize='small'
