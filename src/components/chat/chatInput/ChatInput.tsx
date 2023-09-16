@@ -6,8 +6,8 @@ import '../../../assets/stylesheets/chat/chatInput.scss';
 interface ChatInputProps {
   input: string;
   inputRef: React.RefObject<HTMLTextAreaElement>;
-  handleInputChange: () => void;
-  handleEnter: () => void;
+  handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleEnter: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   handleSend: () => void;
 }
 
@@ -23,24 +23,21 @@ const ChatInput = (props: ChatInputProps) => {
   });
 
   return (
-    <>
-      <div className='chat-input-container'>
-        <textarea
-          className='chat-text-area'
-          placeholder="Ask me anything!"
-          value={input}
-          ref={inputRef}
-          onChange={handleInputChange}
-          onKeyDown={handleEnter}
-        />
-        {
-          input.length > 0 &&
-          <IconButton id="iconbutton" onClick={() => handleSend()}>
-            <TelegramIcon className='chat-send' />
-          </IconButton>
-        }
-      </div>
-    </>
+    <div className="chat-input-container">
+      <textarea
+        className="chat-text-area"
+        placeholder="Ask me anything!"
+        value={input}
+        ref={inputRef}
+        onChange={handleInputChange}
+        onKeyDown={handleEnter}
+      />
+      {input.length > 0 && (
+        <IconButton id="iconbutton" onClick={() => handleSend()}>
+          <TelegramIcon className="chat-send" />
+        </IconButton>
+      )}
+    </div>
   );
 }
 

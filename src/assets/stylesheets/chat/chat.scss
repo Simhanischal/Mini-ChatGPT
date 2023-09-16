@@ -1,0 +1,17 @@
+.chat-container {
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+  border: 1px solid none;
+  border-radius: 7px;
+  width: 370px;
+  box-shadow: 0 10px 30px 1px rgb(0 0 0 / 30%);
+  /*for mobile display*/
+  @media (max-width: 480px) {
+    position: absolute;
+    top: 10px;
+    right: 3px;
+    left: 2px;
+    box-shadow: none;
+  }
+}
