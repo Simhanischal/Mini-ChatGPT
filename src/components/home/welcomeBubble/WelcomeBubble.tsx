@@ -2,7 +2,7 @@ import Cancel from '@material-ui/icons/cancel';
 import '../../../assets/stylesheets/home/WelcomeBubble.scss';
 
 interface WelcomeBubbleProps {
-  welcomeMessage: string;
+  welcomeMessage: boolean;
   closeWelcomeMessage: () => void;
   handleChangeIcon: () => void;
 }

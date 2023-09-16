@@ -5,7 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 interface WelcomeCircleProps {
   changeIcon: boolean;
-  welcomeMessage: string;
+  welcomeMessage: boolean;
   handleChangeIcon: () => void;
   image: string;
   width: number;
