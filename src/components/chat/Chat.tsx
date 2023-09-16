@@ -7,8 +7,8 @@ import TypingIndicator from "../chat/typingIndicator/TypingIndicator";
 import "../../assets/stylesheets/chat/chat.scss";
 
 interface Message {
-  type: string;
-  message: string;
+  role: string;
+  content: string;
   datetime: string;
 }
 
@@ -19,7 +19,10 @@ interface ChatProps {
   shouldRetrieveBackup: boolean;
 }
 
+const API_KEY = "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";
+
 const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatProps) => {
+  console.log('messages', messages)
   const [input, setInput] = useState("");
   const [typingIndicator, setTypingIndicator] = useState(false);
 
@@ -33,37 +36,17 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
     setInput(event.target.value);
   };
 
-  //takes the message user inputs in the chat and makes a POST API call to the server
-  //to get the corresponding reply from the bot
-  //repalce the placeholder method definition with the actual API call
-  const fetchBotReply = () => {
-    setTimeout(() => {
-      setMessages((oldMessages: Array<Message>) => [
-        ...oldMessages,
-        {
-          type: "bot",
-          //default message
-          message:
-            "Sorry, I don't understand that! Please connect me to a ChatBot API to get proper responses! Have a good day!",
-          datetime: new Date().toLocaleString(),
-        },
-      ]);
-      setTypingIndicator(false);
-    }, 2000);
-  };
-
   const handleSend = (userInput = input) => {
     if (userInput !== "") {
       setMessages((oldMessages: Array<Message>) => [
         ...oldMessages,
         {
-          type: "user",
-          message: userInput,
+          role: "user",
+          content: userInput,
           datetime: new Date().toLocaleString(),
         },
       ]);
       setTypingIndicator(true);
-      fetchBotReply();
       setInput("");
     }
   };
@@ -94,6 +77,37 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
       window.localStorage.setItem("messages", JSON.stringify(messages));
   }, [messages, shouldRetrieveBackup]);
 
+  useEffect(() => {
+    const messagesForApiBody = messages.map(({role, content}) => ({role, content}));
+    console.log(messagesForApiBody);
+    const apiRequestBody = {
+      model: "gpt-3.5-turbo",
+      messages: messagesForApiBody,
+    };
+    
+    const fetchResponse = () => {
+      fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + API_KEY,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(apiRequestBody),
+      })
+      .then((response) => response.json())
+      .then((message) => {
+        const reply = message.choices[0].message;
+        const newMessage = {...reply, datetime: new Date().toLocaleString()}
+        setMessages([...messages, newMessage]);
+        setTypingIndicator(false);
+      });
+    }
+
+    if (messages[messages.length - 1].role === 'user') {
+      fetchResponse();
+    }
+  }, [messages, setMessages]);
+
   return (
     <>
       {openWindow && (
@@ -101,14 +115,14 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
           <ChatBanner />
           <ChatMessages windowEndRef={windowEndRef}>
             {messages.map((message) => {
-              if (message.type === "bot") {
+              if (message.role === "assistant") {
                 return (
                   <React.Fragment
-                    key={message.datetime.concat(message.message)}
+                    key={message.datetime.concat(message.content)}
                   >
                     <ChatBubble
                       isBotBubble
-                      message={message.message}
+                      message={message.content}
                       datetime={message.datetime}
                     />
                   </React.Fragment>
@@ -116,12 +130,12 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
               } else {
                 return (
                   <React.Fragment
-                    key={message.datetime.concat(message.message)}
+                    key={message.datetime.concat(message.content)}
                   >
                     <br />
                     <ChatBubble
                       isBotBubble={false}
-                      message={message.message}
+                      message={message.content}
                       datetime={message.datetime}
                     />
                   </React.Fragment>

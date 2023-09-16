@@ -5,9 +5,9 @@ import Chat from './chat/Chat';
 const ChatBot = () => {
   const localMessages = window.localStorage.getItem("messages");
   const defaultMessages = [{
-    'type': 'bot',
-    'message': 'Hey there, welcome back! Anything I can help you with?',
-    'datetime': new Date().toLocaleString() //current date and time
+    'role': 'assistant',
+    'content': 'Hey there, welcome back! Anything I can help you with?',
+    'datetime': new Date().toLocaleString()
   }];
   const [changeIcon, setChangeIcon] = useState(false);
   const [welcomeMessage, setWelcomeMessage] = useState(true);
@@ -34,7 +34,6 @@ const ChatBot = () => {
     else {
       closeWelcomeMessage();
       setChangeIcon(true);
-      //if it is the first time the user is clicking on the chat icon, if localStorage exists, display shouldRetrieveBackup modal
       if (firstClick
         && localMessages && JSON.parse(localMessages) !== null
         && JSON.parse(localMessages).length > 1
@@ -58,7 +57,7 @@ const ChatBot = () => {
   const handleNewConvo = () => {
     setShouldRetrieveBackup(false);
     localStorage.clear();
-    setMessages(defaultMessages); //creating a new conversation
+    setMessages(defaultMessages);
     setOpenAlert(false);
     setOpenWindow(true);
   }
