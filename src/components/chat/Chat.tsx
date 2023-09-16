@@ -44,7 +44,7 @@ const Chat = ({ messages, setMessages, openWindow, backup }: ChatProps) => {
           type: "bot",
           //default message
           message:
-            "Sorry, I dont understand that! Please connect me to a ChatBot API to get proper responses! Have a good day!",
+            "Sorry, I don't understand that! Please connect me to a ChatBot API to get proper responses! Have a good day!",
           datetime: new Date().toLocaleString(),
         },
       ]);
