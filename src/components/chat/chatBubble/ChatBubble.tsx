@@ -4,12 +4,12 @@ import '../../../assets/stylesheets/chat/chatBubble.scss';
 interface ChatBubbleProps {
   isBotBubble: boolean;
   message: string;
-  dateTime: string;
+  datetime: string;
 }
 
 const ChatBubble = (props: ChatBubbleProps) => {
   let classNameText;
-  const { isBotBubble, message, dateTime } = props;
+  const { isBotBubble, message, datetime } = props;
 
   if (isBotBubble) {
     classNameText = "bot";
@@ -25,7 +25,7 @@ const ChatBubble = (props: ChatBubbleProps) => {
       </div>
       <br />
       <div className={`${classNameText}-date-time`} id="datetime">
-        {dateTime}
+        {datetime}
       </div>
       <br />
     </div>

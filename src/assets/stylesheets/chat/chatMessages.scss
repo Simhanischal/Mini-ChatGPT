@@ -1,0 +1,11 @@
+.messages-container {
+  width: 370px;
+  height: 370px;
+  background-color: #000000;
+  color: #ffffff;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 0; /* to remove scrollbar space */
+    background: transparent; /* to make scrollbar invisible */
+  }
+}
