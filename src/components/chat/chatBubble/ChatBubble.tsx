@@ -8,27 +8,23 @@ interface ChatBubbleProps {
 }
 
 const ChatBubble = (props: ChatBubbleProps) => {
-  let bubbleDiv, messageBubbleDiv, dateTimeDiv;
+  let classNameText;
   const { isBotBubble, message, dateTime } = props;
 
   if (isBotBubble) {
-    bubbleDiv = "bot-bubble-div";
-    messageBubbleDiv = "bot-bubble";
-    dateTimeDiv = "bot-date-time";
+    classNameText = "bot";
   } else {
-    bubbleDiv = "user-bubble-div";
-    messageBubbleDiv = "user-bubble";
-    dateTimeDiv = "user-date-time";
+    classNameText = "user";
   }
 
   return (
-    <div className={bubbleDiv}>
+    <div className={`${classNameText}-bubble-div`}>
       {isBotBubble && <img alt="Chat Avatar" className="chat-avatar" src={Image} />}
-      <div className={messageBubbleDiv} id="bubble">
+      <div className={`${classNameText}-bubble`} id="bubble">
         {message}
       </div>
       <br />
-      <div className={dateTimeDiv} id="datetime">
+      <div className={`${classNameText}-date-time`} id="datetime">
         {dateTime}
       </div>
       <br />
