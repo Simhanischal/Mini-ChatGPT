@@ -1,7 +1,9 @@
+import ChatBot from "./components/ChatBot";
+
 function App() {
   return (
     <>
-     Initial Setup!
+      <ChatBot />
     </>
   )
 }

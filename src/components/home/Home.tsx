@@ -1,12 +1,14 @@
 import WelcomeBubble from './welcomeBubble/WelcomeBubble';
 import WelcomeCircle from './welcomeCircle/WelcomeCircle';
 import BackupAlert from './backupAlert/BackupAlert';
+
 import Image from '../../assets/images/logo192.png';
+import '../../assets/stylesheets/home/Home.scss';
 
 interface HomeProps {
     changeIcon: boolean;
     openAlert: boolean;
-    welcomeMessage: string;
+    welcomeMessage: boolean;
     closeWelcomeMessage: () => void;
     handleChangeIcon: () => void;
     handleNewConvo: () => void;
