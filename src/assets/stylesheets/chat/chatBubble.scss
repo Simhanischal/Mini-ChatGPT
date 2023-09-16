@@ -1,0 +1,65 @@
+.bot-bubble-div {
+  float: left;
+  clear: both;
+}
+
+.user-bubble-div {
+  float: right;
+  margin-right: 10px;
+  clear: both; /* to avoid two chat bubbles next to each other */
+}
+
+.bot-bubble {
+  margin-top: 15px;
+  background-color: #808080;
+  margin-left: 5px;
+  &::selection{
+    color: #FFFFFF;
+    background-color: #5851DB;
+  }
+}
+
+.user-bubble {
+  background-color: #5851DB;
+  min-width: 100px;
+  &::selection{
+      color: #FFFFFF;
+      background-color: #808080;
+  }
+}
+
+.bot-bubble, .user-bubble {
+  color: #FFFFFF;
+  border-radius: 5px;
+  max-width: 250px;
+  display: inline-block;
+  word-break: normal;
+  word-wrap: break-word;
+  padding: 10px;
+  font-size: 14px;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.bot-date-time {
+  font-size: 10px;
+  float: left;
+  margin-left: 40px;
+}
+
+.user-date-time {
+  font-size: 10px;
+  float: right;
+}
+
+.chat-avatar {
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  padding: 3px 4px;
+  margin-bottom: -10px;
+  margin-left: 5px;
+  width: 20px;
+  vertical-align: middle;
+}
