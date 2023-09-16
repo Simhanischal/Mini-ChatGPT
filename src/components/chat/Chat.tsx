@@ -16,10 +16,10 @@ interface ChatProps {
   messages: Array<Message>;
   setMessages: React.Dispatch<React.SetStateAction<Array<Message>>>;
   openWindow: boolean;
-  backup: boolean;
+  shouldRetrieveBackup: boolean;
 }
 
-const Chat = ({ messages, setMessages, openWindow, backup }: ChatProps) => {
+const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatProps) => {
   const [input, setInput] = useState("");
   const [typingIndicator, setTypingIndicator] = useState(false);
 
@@ -90,9 +90,9 @@ const Chat = ({ messages, setMessages, openWindow, backup }: ChatProps) => {
 
   useEffect(() => {
     //store the updated conversation in localstorage whenever messages are updated
-    if (messages.length > 1 || !backup)
+    if (messages.length > 1 || !shouldRetrieveBackup)
       window.localStorage.setItem("messages", JSON.stringify(messages));
-  }, [messages, backup]);
+  }, [messages, shouldRetrieveBackup]);
 
   return (
     <>
