@@ -25,7 +25,6 @@
     "@typescript-eslint/parser": "^6.7.0",
     "@vitejs/plugin-react": "^4.0.3",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.7",
     "eslint": "^8.49.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
