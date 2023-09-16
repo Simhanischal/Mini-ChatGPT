@@ -19,7 +19,7 @@ interface ChatProps {
   shouldRetrieveBackup: boolean;
 }
 
-const API_KEY = "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";
+const API_KEY = import.meta.env.VITE_API_KEY; 
 
 const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatProps) => {
   console.log('messages', messages)
