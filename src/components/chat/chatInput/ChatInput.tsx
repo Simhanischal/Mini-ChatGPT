@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import TelegramIcon from '@material-ui/icons/Telegram';
