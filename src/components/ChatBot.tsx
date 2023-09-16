@@ -4,6 +4,11 @@ import Chat from './chat/Chat';
 
 const ChatBot = () => {
     const localMessages = window.localStorage.getItem("messages");
+    const defaultMessages = [{
+        'type': 'bot',
+        'message': 'Hey there, welcome back! Anything I can help you with?',
+        'datetime': new Date().toLocaleString() //current date and time
+    }];
     const [changeIcon, setChangeIcon] = useState(false);
     const [welcomeMessage, setWelcomeMessage] = useState(true);
     const [openWindow, setOpenWindow] = useState(false);
@@ -13,13 +18,7 @@ const ChatBot = () => {
     const [messages, setMessages] = useState(
         backup && localMessages && JSON.parse(localMessages) !== null
             ? JSON.parse(localMessages)
-            : [
-                {
-                    'type': 'bot',
-                    'message': 'Hey there, welcome back!Anything I can help you with?',
-                    'datetime': new Date().toLocaleString() //current date and time
-                }
-            ]);
+            : defaultMessages);
 
     const closeWelcomeMessage = () => {
         setWelcomeMessage(false); //hide the welcome bubble
@@ -65,11 +64,7 @@ const ChatBot = () => {
     const handleNewConvo = () => {
         setBackup(false); //set the backup state to false indicating a new conversation has to be started
         localStorage.clear();
-        setMessages([{
-            'type': 'bot',
-            'message': 'Hey there, welcome back! Anything I can help you with?',
-            'datetime': new Date().toLocaleString() //current date and time
-        }]); //creating a new conversation
+        setMessages(defaultMessages); //creating a new conversation
         setOpenAlert(false); // close the backup alert
         setOpenWindow(true); //open the chat window
     }
