@@ -1,5 +1,5 @@
-import Typography from "@material-ui/core/Typography";
-import { green } from "@material-ui/core/colors";
+import Typography from '@mui/material/Typography';
+import { green } from "@mui/material/colors";
 import Image from "../../../assets/images/logo192.png";
 import "../../../assets/stylesheets/chat/chatBanner.scss";
 

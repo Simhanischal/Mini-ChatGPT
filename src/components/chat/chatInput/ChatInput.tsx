@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import TelegramIcon from '@material-ui/icons/Telegram';
+import IconButton from '@mui/material/IconButton';
+import TelegramIcon from '@mui/icons-material/Telegram';
 import '../../../assets/stylesheets/chat/chatInput.scss';
 
 interface ChatInputProps {

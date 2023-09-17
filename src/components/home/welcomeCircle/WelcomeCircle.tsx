@@ -1,7 +1,7 @@
 import '../../../assets/stylesheets/home/welcomeCircle.scss';
-import Badge from '@material-ui/core/Badge';
-import QuestionAnswerIconOutlined from '@material-ui/icons/QuestionAnswerOutlined';
-import CloseIcon from '@material-ui/icons/Close';
+import Badge from '@mui/material/Badge';
+import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface WelcomeCircleProps {
   changeIcon: boolean;
@@ -17,7 +17,7 @@ const WelcomeCircle = ({changeIcon, welcomeMessage, handleChangeIcon, image, wid
   if (changeIcon) {
     icon = <CloseIcon style={{ fontSize: 40, color: "#5851DB" }} />
   } else{
-    icon = <QuestionAnswerIconOutlined style={{ fontSize: 40, color: "#5851DB" }} />
+    icon = <QuestionAnswerOutlinedIcon style={{ fontSize: 40, color: "#5851DB" }} />
   }
 
   if (welcomeMessage) {
