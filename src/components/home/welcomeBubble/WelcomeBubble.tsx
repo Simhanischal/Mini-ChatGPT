@@ -18,7 +18,7 @@ const WelcomeBubble = ({ welcomeMessage, closeWelcomeMessage, handleChangeIcon }
       />
       <div
         className='bubble-div'
-        id='bubble'
+        data-testid='bubble'
         onClick={handleChangeIcon}
       >
         Hey there, welcome back!
