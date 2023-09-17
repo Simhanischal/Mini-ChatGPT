@@ -1,21 +1,17 @@
 {
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "snapshotSerializers": [
-      "./node_modules/enzyme-to-json/serializer"
-    ],
+    "roots": ["<rootDir>"],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
     "moduleNameMapper": {
       "\\.(css|scss|svg|png)$": "identity-obj-proxy"
     },
-    "testMatch": [
-      "**/tests/**/(*.)(spec|test).[t]s?(x)"
-    ],
+    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+    "testEnvironment": "jsdom",
     "collectCoverage": true,
     "collectCoverageFrom": ["src/**/*.tsx"],
     "coverageDirectory": "target/reports/coverage",
-    "coverageReporters": ["html", "lcov", "cobertura", "text-summary"],
-    "testEnvironment": "jest-environment-jsdom-sixteen",
-    "testURL": "https://jestjs.io"
+    "coverageReporters": ["html", "lcov", "cobertura", "text-summary"]
   }
   

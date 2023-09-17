@@ -26,7 +26,7 @@ const WelcomeCircle = ({changeIcon, welcomeMessage, handleChangeIcon, image, wid
         &nbsp;&nbsp;
         <Badge badgeContent={1} overlap="circular" color="error">
           <button className="avatar" onClick={handleChangeIcon}>
-            <img alt="avatar" src={image} width={width} />
+            <img alt="avatar" data-testid="welcome-circle-image" src={image} width={width} />
           </button>
         </Badge> 
       </>
