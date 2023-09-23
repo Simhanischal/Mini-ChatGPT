@@ -28,10 +28,10 @@ const BackupAlert = ({ openAlert, handleRestore, handleNewConvo }: BackupAlertPr
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button id="restore-button" onClick={handleRestore}>
+        <Button id="restore-button" data-testid="restore-button" onClick={handleRestore}>
           Yes, restore!
         </Button>
-        <Button id="new-convo-button" onClick={handleNewConvo}>
+        <Button id="new-convo-button" data-testid="new-convo-button" onClick={handleNewConvo}>
           No, start a new conversation!
         </Button>
       </DialogActions>

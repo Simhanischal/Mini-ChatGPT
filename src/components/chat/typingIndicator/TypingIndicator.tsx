@@ -9,7 +9,7 @@ const TypingIndicator = ({ typingIndicator }: TypingIndicatorProps) => {
   let display;
   if (typingIndicator) {
     display = (
-      <div className="typing-indicator-container">
+      <div className="typing-indicator-container" data-testid="typing-indicator">
         <img className="chatAvatar" alt="Avatar" src={Image} />
         <span id="text">GPT is typing.....</span>
       </div>
