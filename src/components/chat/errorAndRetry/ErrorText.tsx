@@ -1,0 +1,22 @@
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+
+import '../../../assets/stylesheets/chat/chatBubble.scss';
+
+interface ErrorTextProps {
+  handleRetry: (id:string) => void;
+  id: string;
+}
+
+export const ErrorText = (props: ErrorTextProps) => (
+  <div className="error-div">
+    <ErrorOutlineIcon className="failed-icon" />
+    <p className="failed-text">Failed to get response.</p>
+    <button className='retry-button' onClick={() => props.handleRetry(props.id)}>Retry</button>
+  </div>
+);
+
+export const RetryText = () => (
+  <div className="retry-div">
+    <p className="retrying-text">Retrying...</p>
+  </div>
+);

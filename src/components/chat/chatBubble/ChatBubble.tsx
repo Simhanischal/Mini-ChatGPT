@@ -1,15 +1,27 @@
+import { ErrorText, RetryText } from '../errorAndRetry/ErrorText';
 import Image from '../../../assets/images/logo192.png';
 import '../../../assets/stylesheets/chat/chatBubble.scss';
 
+interface Message {
+  role: string;
+  content: string;
+  datetime: string;
+  id: string;
+  status?: string;
+}
+
 interface ChatBubbleProps {
   isBotBubble: boolean;
-  message: string;
-  datetime: string;
+  message: Message;
+  status?: string;
+  handleRetry: (id: string) => void;
+  retryMsgId?: string;
 }
 
 const ChatBubble = (props: ChatBubbleProps) => {
   let classNameText;
-  const { isBotBubble, message, datetime } = props;
+  const { isBotBubble, message, handleRetry, retryMsgId, status } = props;
+  const { datetime, status: msgStatus, id, role, content } = message;
 
   if (isBotBubble) {
     classNameText = "bot";
@@ -19,15 +31,20 @@ const ChatBubble = (props: ChatBubbleProps) => {
 
   return (
     <div className={`${classNameText}-bubble-div`}>
-      {isBotBubble && <img alt="Chat Avatar" className="chat-avatar" src={Image} />}
+      {isBotBubble ? <img alt="Chat Avatar" className="chat-avatar" src={Image}/> : <br/>  }
       <div className={`${classNameText}-bubble`} id="bubble">
-        {message}
+        {content}
       </div>
-      <br />
+      <br/>
       <div className={`${classNameText}-date-time`} id="datetime">
         {datetime}
       </div>
-      <br />
+      <br/>
+      
+      {(status === 'failed' && role === 'user' && msgStatus !== 'success') ? (
+        <ErrorText handleRetry={handleRetry} id={id} />
+      ) : (status === 'retrying' && id === retryMsgId) && <RetryText />
+      }
     </div>
   );
 }
