@@ -1,15 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import ChatBanner from "../chat/chatBanner/ChatBanner";
 import ChatBubble from "../chat/chatBubble/ChatBubble";
 import ChatInput from "../chat/chatInput/ChatInput";
 import ChatMessages from "../chat/chatMessages/ChatMessages";
 import TypingIndicator from "../chat/typingIndicator/TypingIndicator";
 import "../../assets/stylesheets/chat/chat.scss";
+import { fetchResponse } from "../../services";
 
-interface Message {
+export interface Message {
   role: string;
   content: string;
   datetime: string;
+  id: string;
+  status?: string;
 }
 
 interface ChatProps {
@@ -19,12 +23,22 @@ interface ChatProps {
   shouldRetrieveBackup: boolean;
 }
 
-const API_KEY = import.meta.env.VITE_API_KEY; 
+const API_KEY = import.meta.env.VITE_API_KEY;
+const url = "https://api.openai.com/v1/chat/completions";
 
 const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatProps) => {
-  console.log('messages', messages)
   const [input, setInput] = useState("");
   const [typingIndicator, setTypingIndicator] = useState(false);
+  const [status, setStatus] = useState('');
+  const [retryMsgId, setRetryMsgId] = useState('');
+
+  const messagesForApiBody = messages.map(({ role, content }) => ({ role, content }));
+  const apiRequestBody = useMemo(() => {
+    return {
+      model: "gpt-3.5-turbo",
+      messages: messagesForApiBody,
+    }
+  }, [messagesForApiBody]);
 
   //creating a refernce for the end of chat window
   const windowEndRef: React.RefObject<HTMLDivElement> = useRef(null);
@@ -44,6 +58,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
           role: "user",
           content: userInput,
           datetime: new Date().toLocaleString(),
+          id: uuidv4(),
         },
       ]);
       setTypingIndicator(true);
@@ -54,7 +69,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
   const handleEnter = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      handleSend();
+      ((status === '' || status === 'success') && handleSend());
     }
   };
 
@@ -65,6 +80,12 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
       const maxScrollTop = scrollHeight - height;
       windowEndRef.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
     }
+  };
+
+  const handleRetry = async (id: string) => {
+    setStatus('retrying');
+    setRetryMsgId(id);
+    fetchResponse(url, API_KEY, apiRequestBody, messages, setMessages, setTypingIndicator, setStatus);
   };
 
   useEffect(() => {
@@ -78,41 +99,16 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
   }, [messages, shouldRetrieveBackup]);
 
   useEffect(() => {
-    const messagesForApiBody = messages.map(({role, content}) => ({role, content}));
-    console.log(messagesForApiBody);
-    const apiRequestBody = {
-      model: "gpt-3.5-turbo",
-      messages: messagesForApiBody,
-    };
-    
-    const fetchResponse = () => {
-      fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + API_KEY,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(apiRequestBody),
-      })
-      .then((response) => response.json())
-      .then((message) => {
-        const reply = message.choices[0].message;
-        const newMessage = {...reply, datetime: new Date().toLocaleString()}
-        setMessages([...messages, newMessage]);
-        setTypingIndicator(false);
-      });
+    if (messages[messages.length - 1].role === 'user' ) {
+      fetchResponse(url, API_KEY, apiRequestBody, messages, setMessages, setTypingIndicator, setStatus);
     }
-
-    if (messages[messages.length - 1].role === 'user') {
-      fetchResponse();
-    }
-  }, [messages, setMessages]);
+  }, [messages, setMessages, setTypingIndicator, apiRequestBody]);
 
   return (
     <>
       {openWindow && (
         <div className="chat-container">
-          <ChatBanner />
+          <ChatBanner />  
           <ChatMessages windowEndRef={windowEndRef}>
             {messages.map((message) => {
               if (message.role === "assistant") {
@@ -122,8 +118,8 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
                   >
                     <ChatBubble
                       isBotBubble
-                      message={message.content}
-                      datetime={message.datetime}
+                      message={message}
+                      handleRetry={handleRetry}
                     />
                   </React.Fragment>
                 );
@@ -132,11 +128,12 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
                   <React.Fragment
                     key={message.datetime.concat(message.content)}
                   >
-                    <br />
                     <ChatBubble
                       isBotBubble={false}
-                      message={message.content}
-                      datetime={message.datetime}
+                      message={message}
+                      status={status}
+                      handleRetry={handleRetry}
+                      retryMsgId={retryMsgId}
                     />
                   </React.Fragment>
                 );
@@ -150,6 +147,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
             handleInputChange={handleInputChange}
             handleSend={handleSend}
             handleEnter={handleEnter}
+            status={status}
           />
         </div>
       )}

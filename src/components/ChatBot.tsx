@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Home from './home/Home';
 import Chat from './chat/Chat';
 
@@ -7,7 +8,8 @@ const ChatBot = () => {
   const defaultMessages = [{
     'role': 'assistant',
     'content': 'Hey there, welcome back! Anything I can help you with?',
-    'datetime': new Date().toLocaleString()
+    'datetime': new Date().toLocaleString(),
+    'id': uuidv4(),
   }];
   const [changeIcon, setChangeIcon] = useState(false);
   const [welcomeMessage, setWelcomeMessage] = useState(true);

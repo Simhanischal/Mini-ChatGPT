@@ -22,6 +22,7 @@
 .user-bubble {
   background-color: #5851DB;
   min-width: 100px;
+  float: right;
   &::selection{
       color: #FFFFFF;
       background-color: #808080;
@@ -62,4 +63,48 @@
   margin-left: 5px;
   width: 20px;
   vertical-align: middle;
+}
+
+.failed-icon {
+  color: red;
+  font-size: 12px !important;
+  margin: 0.2rem;
+}
+
+.failed-text {
+  margin: 0;
+  font-size: 12px;
+  color: red;
+  align-items: center;
+  display: flex;
+}
+
+.retrying-text {
+  margin: 0;
+  font-size: 12px;
+  color: rgb(230, 255, 9);
+  align-items: center;
+  display: flex;
+  margin-top: 0;
+}
+
+.error-div, .retry-div {
+  display: flex;
+  float: right;
+  clear: both;
+}
+
+.retry-button:focus, .retry-button {
+  color: #706bdd;
+  text-decoration: underline;
+  border-radius: 8px;
+  padding: 0;
+  outline: none;
+  font-size: 11px;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  padding: 0;
+  border: none;
+  background: none; 
 }

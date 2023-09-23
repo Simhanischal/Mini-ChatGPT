@@ -9,10 +9,11 @@ interface ChatInputProps {
   handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleEnter: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   handleSend: () => void;
+  status: string;
 }
 
 const ChatInput = (props: ChatInputProps) => {
-  const { input, inputRef, handleInputChange, handleEnter, handleSend } = props;
+  const { input, inputRef, handleInputChange, handleEnter, handleSend, status } = props;
 
   useEffect(() => {
     //if the device is not a mobile, then autofocus
@@ -33,7 +34,7 @@ const ChatInput = (props: ChatInputProps) => {
         onChange={handleInputChange}
         onKeyDown={handleEnter}
       />
-      {input.length > 0 && (
+      {input.length > 0 && (status === '' || status === 'success') && (
         <IconButton id="iconbutton" onClick={() => handleSend()}>
           <TelegramIcon className="chat-send" />
         </IconButton>
