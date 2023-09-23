@@ -9,7 +9,7 @@
     "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
     "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
     "testEnvironment": "jsdom",
-    "collectCoverage": true,
+    "collectCoverage": false,
     "collectCoverageFrom": ["src/**/*.tsx"],
     "coverageDirectory": "target/reports/coverage",
     "coverageReporters": ["html", "lcov", "cobertura", "text-summary"]

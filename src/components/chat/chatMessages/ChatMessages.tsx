@@ -1,7 +1,7 @@
 import "../../../assets/stylesheets/chat/chatMessages.scss";
 
 interface ChatMessagesProps {
-  windowEndRef: React.RefObject<HTMLDivElement>;
+  windowEndRef?: React.RefObject<HTMLDivElement>;
   children: React.ReactNode;
 }
 
