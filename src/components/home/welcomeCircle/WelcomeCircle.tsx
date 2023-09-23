@@ -25,15 +25,15 @@ const WelcomeCircle = ({changeIcon, welcomeMessage, handleChangeIcon, image, wid
       <>
         &nbsp;&nbsp;
         <Badge badgeContent={1} overlap="circular" color="error">
-          <button className="avatar" onClick={handleChangeIcon}>
-            <img alt="avatar" src={image} width={width} />
+          <button className="avatar" data-testid="avatar-button" onClick={handleChangeIcon}>
+            <img alt="avatar" data-testid="welcome-circle-image" src={image} width={width} />
           </button>
         </Badge> 
       </>
     );
   } else{
     display = (
-      <button className="avatar" onClick={handleChangeIcon}>
+      <button className="avatar" data-testid="avatar-button" onClick={handleChangeIcon}>
         { icon }
       </button>
     );

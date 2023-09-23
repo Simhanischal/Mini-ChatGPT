@@ -5,7 +5,7 @@ import '../../../assets/stylesheets/chat/chatInput.scss';
 
 interface ChatInputProps {
   input: string;
-  inputRef: React.RefObject<HTMLTextAreaElement>;
+  inputRef?: React.RefObject<HTMLTextAreaElement>;
   handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleEnter: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   handleSend: () => void;
@@ -20,13 +20,14 @@ const ChatInput = (props: ChatInputProps) => {
     //this case is being handled because of keyboard popping up
     //in mobile devices as soon as the text area is focused
     if (window.screen.width > 500)
-      inputRef.current?.focus();
+      inputRef?.current?.focus();
   });
 
   return (
     <div className="chat-input-container">
       <textarea
         className="chat-text-area"
+        data-testid="chat-text-area"
         placeholder="Ask me anything!"
         value={input}
         ref={inputRef}

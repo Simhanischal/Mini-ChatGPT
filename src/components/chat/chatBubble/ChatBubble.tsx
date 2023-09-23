@@ -31,12 +31,12 @@ const ChatBubble = (props: ChatBubbleProps) => {
 
   return (
     <div className={`${classNameText}-bubble-div`}>
-      {isBotBubble ? <img alt="Chat Avatar" className="chat-avatar" src={Image}/> : <br/>  }
-      <div className={`${classNameText}-bubble`} id="bubble">
-        {content}
+      {isBotBubble && <img alt="Chat Avatar" data-testid="bubble-avatar" className="chat-avatar" src={Image} />}
+      <div className={`${classNameText}-bubble`} data-testid="bubble-message" id="bubble">
+        {message}
       </div>
-      <br/>
-      <div className={`${classNameText}-date-time`} id="datetime">
+      <br />
+      <div className={`${classNameText}-date-time`} data-testid="bubble-datetime" id="datetime">
         {datetime}
       </div>
       <br/>
