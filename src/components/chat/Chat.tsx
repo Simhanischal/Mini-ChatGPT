@@ -47,7 +47,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
   const inputRef: React.RefObject<HTMLTextAreaElement> = useRef(null);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setInput(event.target.value);
+    setInput(event.target.value);
   };
 
   const handleSend = (userInput = input) => {
