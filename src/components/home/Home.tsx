@@ -4,16 +4,7 @@ import BackupAlert from './backupAlert/BackupAlert';
 
 import Image from '../../assets/images/logo192.png';
 import '../../assets/stylesheets/home/Home.scss';
-
-interface HomeProps {
-  changeIcon: boolean;
-  openAlert: boolean;
-  welcomeMessage: boolean;
-  closeWelcomeMessage: () => void;
-  handleChangeIcon: () => void;
-  handleNewConvo: () => void;
-  handleRestore: () => void;
-}
+import { HomeProps } from '../../constants';
 
 const Welcome = (props: HomeProps) => {
   const { changeIcon, welcomeMessage, handleChangeIcon, closeWelcomeMessage, openAlert, handleNewConvo, handleRestore } = props;

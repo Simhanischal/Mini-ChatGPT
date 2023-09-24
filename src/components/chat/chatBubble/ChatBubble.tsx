@@ -1,15 +1,7 @@
 import { ErrorText, RetryText } from '../errorAndRetry/ErrorText';
 import Image from '../../../assets/images/logo192.png';
 import '../../../assets/stylesheets/chat/chatBubble.scss';
-import { Statuses, Message, Roles } from '../../../constants';
-
-interface ChatBubbleProps {
-  isBotBubble: boolean;
-  message: Message;
-  status?: string;
-  handleRetry: (id: string) => void;
-  retryMsgId?: string;
-}
+import { Statuses, Roles, ChatBubbleProps } from '../../../constants';
 
 const { failed, retrying, success } = Statuses;
 const { user } = Roles;

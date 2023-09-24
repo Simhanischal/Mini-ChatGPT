@@ -1,9 +1,6 @@
 import Image from "../../../assets/images/logo192.png";
 import "../../../assets/stylesheets/chat/typingIndicator.scss";
-
-interface TypingIndicatorProps {
-  typingIndicator: boolean;
-}
+import { TypingIndicatorProps } from '../../../constants';
 
 const TypingIndicator = ({ typingIndicator }: TypingIndicatorProps) => {
   let display;

@@ -1,11 +1,7 @@
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 import '../../../assets/stylesheets/chat/chatBubble.scss';
-
-interface ErrorTextProps {
-  handleRetry: (id:string) => void;
-  id: string;
-}
+import { ErrorTextProps } from '../../../constants';
 
 export const ErrorText = (props: ErrorTextProps) => (
   <div className="error-div">

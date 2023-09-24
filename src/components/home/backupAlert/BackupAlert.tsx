@@ -7,11 +7,7 @@ import {
   Button
 } from '@mui/material';
 
-interface BackupAlertProps {
-  openAlert: boolean;
-  handleRestore: () => void;
-  handleNewConvo: () => void;
-}
+import { BackupAlertProps } from '../../../constants';
 
 const BackupAlert = ({ openAlert, handleRestore, handleNewConvo }: BackupAlertProps) => {
   return (

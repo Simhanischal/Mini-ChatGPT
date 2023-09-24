@@ -1,17 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import '../../../assets/stylesheets/chat/chatInput.scss';
-import { Statuses } from '../../../constants';
-
-interface ChatInputProps {
-  input: string;
-  inputRef?: React.RefObject<HTMLTextAreaElement>;
-  handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  handleEnter: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  handleSend: () => void;
-  status: string;
-}
+import { Statuses, ChatInputProps } from '../../../constants';
 
 const { initial, success } = Statuses;
 

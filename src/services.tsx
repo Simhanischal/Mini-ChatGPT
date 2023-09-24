@@ -1,15 +1,7 @@
-import { Message, Statuses, Roles } from './constants';
+import { Message, Statuses, Roles, APIRequestBody } from './constants';
 
 const { failed, success} = Statuses; 
 const { user } = Roles;
-
-interface APIRequestBody {
-  model: string;
-  messages: {
-    role: string;
-    content: string;
-  }[];
-}
 
 export const fetchResponse = (
   url: string,

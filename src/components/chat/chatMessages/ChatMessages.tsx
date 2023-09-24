@@ -1,9 +1,5 @@
 import "../../../assets/stylesheets/chat/chatMessages.scss";
-
-interface ChatMessagesProps {
-  windowEndRef?: React.RefObject<HTMLDivElement>;
-  children: React.ReactNode;
-}
+import { ChatMessagesProps } from '../../../constants';
 
 const ChatMessages = ({ windowEndRef, children }: ChatMessagesProps) => {
   return (
