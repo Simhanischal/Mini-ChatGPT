@@ -1,4 +1,7 @@
-import { Message } from './components/chat/Chat';
+import { Message, Statuses, Roles } from './constants';
+
+const { failed, success} = Statuses; 
+const { user } = Roles;
 
 interface APIRequestBody {
   model: string;
@@ -15,7 +18,7 @@ export const fetchResponse = (
   messages: Array<Message>,
   setMessages: React.Dispatch<React.SetStateAction<Array<Message>>>,
   setTypingIndicator: React.Dispatch<React.SetStateAction<boolean>>,
-  setStatus: React.Dispatch<React.SetStateAction<string>>,
+  setStatus: React.Dispatch<React.SetStateAction<Statuses>>,
 ) => {
   return new Promise(() => {
     fetch(url, {
@@ -31,8 +34,8 @@ export const fetchResponse = (
       const reply = message.choices[0].message;
       const newMessage = { ...reply, datetime: new Date().toLocaleString(), id: message.id };
       const newMessages = messages.map((message) => {
-        if (message.role === 'user' && !message.status) {
-          return {...message, status: 'success'};
+        if (message.role === user && !message.status) {
+          return {...message, status: success};
         } else {
           return message;
         }
@@ -40,11 +43,11 @@ export const fetchResponse = (
       newMessages.push(newMessage)
       setMessages(newMessages);
       setTypingIndicator(false);
-      setStatus('success');
+      setStatus(success);
     })
     .catch((error) => {
       setTypingIndicator(false);
-      setStatus('failed');
+      setStatus(failed);
       console.log(error);
     });
   })
