@@ -10,7 +10,7 @@ import { fetchResponse } from "../../services";
 import { url, ChatProps, Roles, Statuses, Message } from '../../constants';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-const { initial, retrying, success } = Statuses;
+const { initial, retrying, success, sending } = Statuses;
 const { user, assistant } = Roles;
 
 const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatProps) => {
@@ -48,6 +48,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
           id: uuidv4(),
         },
       ]);
+      setStatus(sending);
       setTypingIndicator(true);
       setInput("");
     }
@@ -86,11 +87,13 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
   }, [messages, shouldRetrieveBackup]);
 
   useEffect(() => {
-    if (messages[messages.length - 1].role === user ) {
+    if (status === sending || status === retrying) {
       fetchResponse(url, API_KEY, apiRequestBody, messages, setMessages, setTypingIndicator, setStatus);
     }
-  }, [messages, setMessages, setTypingIndicator, apiRequestBody]);
+  }, [messages, setMessages, typingIndicator, setTypingIndicator, status, apiRequestBody]);
 
+  console.log('status', status);
+  console.log('messages', messages);
   return (
     <>
       {openWindow && (
