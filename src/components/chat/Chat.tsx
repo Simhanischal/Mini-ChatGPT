@@ -92,8 +92,6 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
     }
   }, [messages, setMessages, typingIndicator, setTypingIndicator, status, apiRequestBody]);
 
-  console.log('status', status);
-  console.log('messages', messages);
   return (
     <>
       {openWindow && (
