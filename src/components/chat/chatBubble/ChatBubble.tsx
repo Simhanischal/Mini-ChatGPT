@@ -3,7 +3,7 @@ import Image from '../../../assets/images/logo192.png';
 import '../../../assets/stylesheets/chat/chatBubble.scss';
 import { Statuses, Roles, ChatBubbleProps } from '../../../constants';
 
-const { failed, retrying, success } = Statuses;
+const { failed, retrying, success, initial } = Statuses;
 const { user } = Roles;
 
 const ChatBubble = (props: ChatBubbleProps) => {
@@ -29,7 +29,7 @@ const ChatBubble = (props: ChatBubbleProps) => {
       </div>
       <br/>
       
-      {(status === failed && role === user && msgStatus !== success) ? (
+      {((status === failed || status === initial) && role === user && msgStatus !== success) ? (
         <ErrorText handleRetry={handleRetry} id={id} />
       ) : (status === retrying && id === retryMsgId) && <RetryText />
       }

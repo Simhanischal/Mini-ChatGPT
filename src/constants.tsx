@@ -89,6 +89,7 @@ export enum Statuses {
   failed = 'failed',
   retrying = 'retrying',
   success = 'success',
+  sending = 'sending',
 }
 
 export enum Roles {
