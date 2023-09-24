@@ -2,14 +2,7 @@ import '../../../assets/stylesheets/home/welcomeCircle.scss';
 import Badge from '@mui/material/Badge';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import CloseIcon from '@mui/icons-material/Close';
-
-interface WelcomeCircleProps {
-  changeIcon: boolean;
-  welcomeMessage: boolean;
-  handleChangeIcon: () => void;
-  image: string;
-  width: number;
-}
+import { WelcomeCircleProps } from '../../../constants';
 
 const WelcomeCircle = ({changeIcon, welcomeMessage, handleChangeIcon, image, width}: WelcomeCircleProps) => {
   let display, icon;

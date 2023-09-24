@@ -7,29 +7,16 @@ import ChatMessages from "../chat/chatMessages/ChatMessages";
 import TypingIndicator from "../chat/typingIndicator/TypingIndicator";
 import "../../assets/stylesheets/chat/chat.scss";
 import { fetchResponse } from "../../services";
-
-export interface Message {
-  role: string;
-  content: string;
-  datetime: string;
-  id: string;
-  status?: string;
-}
-
-interface ChatProps {
-  messages: Array<Message>;
-  setMessages: React.Dispatch<React.SetStateAction<Array<Message>>>;
-  openWindow: boolean;
-  shouldRetrieveBackup: boolean;
-}
+import { url, ChatProps, Roles, Statuses, Message } from '../../constants';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-const url = "https://api.openai.com/v1/chat/completions";
+const { initial, retrying, success } = Statuses;
+const { user, assistant } = Roles;
 
 const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatProps) => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [typingIndicator, setTypingIndicator] = useState(false);
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(initial);
   const [retryMsgId, setRetryMsgId] = useState('');
 
   const messagesForApiBody = messages.map(({ role, content }) => ({ role, content }));
@@ -55,7 +42,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
       setMessages((oldMessages: Array<Message>) => [
         ...oldMessages,
         {
-          role: "user",
+          role: user,
           content: userInput,
           datetime: new Date().toLocaleString(),
           id: uuidv4(),
@@ -69,7 +56,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
   const handleEnter = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      ((status === '' || status === 'success') && handleSend());
+      ((status === initial || status === success) && handleSend());
     }
   };
 
@@ -83,7 +70,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
   };
 
   const handleRetry = async (id: string) => {
-    setStatus('retrying');
+    setStatus(retrying);
     setRetryMsgId(id);
     fetchResponse(url, API_KEY, apiRequestBody, messages, setMessages, setTypingIndicator, setStatus);
   };
@@ -99,7 +86,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
   }, [messages, shouldRetrieveBackup]);
 
   useEffect(() => {
-    if (messages[messages.length - 1].role === 'user' ) {
+    if (messages[messages.length - 1].role === user ) {
       fetchResponse(url, API_KEY, apiRequestBody, messages, setMessages, setTypingIndicator, setStatus);
     }
   }, [messages, setMessages, setTypingIndicator, apiRequestBody]);
@@ -111,7 +98,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
           <ChatBanner />  
           <ChatMessages windowEndRef={windowEndRef}>
             {messages.map((message) => {
-              if (message.role === "assistant") {
+              if (message.role === assistant) {
                 return (
                   <React.Fragment
                     key={message.datetime.concat(message.content)}

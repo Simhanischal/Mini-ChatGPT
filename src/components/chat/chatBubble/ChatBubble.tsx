@@ -1,22 +1,10 @@
 import { ErrorText, RetryText } from '../errorAndRetry/ErrorText';
 import Image from '../../../assets/images/logo192.png';
 import '../../../assets/stylesheets/chat/chatBubble.scss';
+import { Statuses, Roles, ChatBubbleProps } from '../../../constants';
 
-interface Message {
-  role: string;
-  content: string;
-  datetime: string;
-  id: string;
-  status?: string;
-}
-
-interface ChatBubbleProps {
-  isBotBubble: boolean;
-  message: Message;
-  status?: string;
-  handleRetry: (id: string) => void;
-  retryMsgId?: string;
-}
+const { failed, retrying, success } = Statuses;
+const { user } = Roles;
 
 const ChatBubble = (props: ChatBubbleProps) => {
   let classNameText;
@@ -41,9 +29,9 @@ const ChatBubble = (props: ChatBubbleProps) => {
       </div>
       <br/>
       
-      {(status === 'failed' && role === 'user' && msgStatus !== 'success') ? (
+      {(status === failed && role === user && msgStatus !== success) ? (
         <ErrorText handleRetry={handleRetry} id={id} />
-      ) : (status === 'retrying' && id === retryMsgId) && <RetryText />
+      ) : (status === retrying && id === retryMsgId) && <RetryText />
       }
     </div>
   );

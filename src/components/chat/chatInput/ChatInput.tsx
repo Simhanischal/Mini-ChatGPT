@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import '../../../assets/stylesheets/chat/chatInput.scss';
+import { Statuses, ChatInputProps } from '../../../constants';
 
-interface ChatInputProps {
-  input: string;
-  inputRef?: React.RefObject<HTMLTextAreaElement>;
-  handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  handleEnter: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  handleSend: () => void;
-  status: string;
-}
+const { initial, success } = Statuses;
 
 const ChatInput = (props: ChatInputProps) => {
   const { input, inputRef, handleInputChange, handleEnter, handleSend, status } = props;
@@ -34,7 +28,7 @@ const ChatInput = (props: ChatInputProps) => {
         onChange={handleInputChange}
         onKeyDown={handleEnter}
       />
-      {input.length > 0 && (status === '' || status === 'success') && (
+      {input.length > 0 && (status === initial || status === success) && (
         <IconButton id="iconbutton" onClick={() => handleSend()}>
           <TelegramIcon className="chat-send" />
         </IconButton>
