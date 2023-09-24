@@ -90,7 +90,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, openWindow]);
+  }, [messages, openWindow, status]);
 
   useEffect(() => {
     //store the updated conversation in localstorage whenever messages are updated
