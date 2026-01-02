@@ -1,4 +1,5 @@
-export const url = "https://api.openai.com/v1/chat/completions";
+import { Part } from '@google/genai';
+import React from 'react';
 
 export interface Message {
   role: string;
@@ -76,11 +77,16 @@ export interface HomeProps {
   handleRestore: () => void;
 }
 
+export enum Roles {
+  user = 'user',
+  assistant = 'model',
+}
+
 export interface APIRequestBody {
   model: string;
   messages: {
-    role: string;
-    content: string;
+    role: Roles;
+    parts: Part[];
   }[];
 }
 
@@ -90,9 +96,4 @@ export enum Statuses {
   retrying = 'retrying',
   success = 'success',
   sending = 'sending',
-}
-
-export enum Roles {
-  user = 'user',
-  assistant = 'assistant',
 }

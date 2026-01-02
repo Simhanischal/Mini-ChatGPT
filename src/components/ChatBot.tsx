@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Home from './home/Home';
 import Chat from './chat/Chat';
-import { Roles } from '../constants';
+import { Roles } from '../models';
 
 const ChatBot = () => {
   const localMessages = window.localStorage.getItem("messages");

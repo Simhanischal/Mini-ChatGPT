@@ -1,7 +1,7 @@
 import { ErrorText, RetryText } from '../errorAndRetry/ErrorText';
 import Image from '../../../assets/images/logo192.png';
 import '../../../assets/stylesheets/chat/chatBubble.scss';
-import { Statuses, Roles, ChatBubbleProps } from '../../../constants';
+import { Statuses, Roles, ChatBubbleProps } from '../../../models';
 
 const { failed, retrying, success, initial } = Statuses;
 const { user } = Roles;
