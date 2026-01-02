@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import '../../../assets/stylesheets/chat/chatInput.scss';
-import { Statuses, ChatInputProps } from '../../../constants';
+import { Statuses, ChatInputProps } from '../../../models';
 
 const { initial, success } = Statuses;
 

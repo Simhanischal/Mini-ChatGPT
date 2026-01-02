@@ -1,7 +1,7 @@
 import {render, screen, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ChatInput from '../src/components/chat/chatInput/ChatInput';
-import { Statuses } from '../src/constants';
+import { Statuses } from '../src/models';
 
 const { initial, success, failed } = Statuses;
 

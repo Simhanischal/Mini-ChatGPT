@@ -4,7 +4,7 @@ import BackupAlert from './backupAlert/BackupAlert';
 
 import Image from '../../assets/images/logo192.png';
 import '../../assets/stylesheets/home/Home.scss';
-import { HomeProps } from '../../constants';
+import { HomeProps } from '../../models';
 
 const Welcome = (props: HomeProps) => {
   const { changeIcon, welcomeMessage, handleChangeIcon, closeWelcomeMessage, openAlert, handleNewConvo, handleRestore } = props;

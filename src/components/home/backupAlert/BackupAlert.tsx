@@ -7,7 +7,7 @@ import {
   Button
 } from '@mui/material';
 
-import { BackupAlertProps } from '../../../constants';
+import { BackupAlertProps } from '../../../models';
 
 const BackupAlert = ({ openAlert, handleRestore, handleNewConvo }: BackupAlertProps) => {
   return (

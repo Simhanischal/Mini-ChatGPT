@@ -7,9 +7,9 @@ import ChatMessages from "../chat/chatMessages/ChatMessages";
 import TypingIndicator from "../chat/typingIndicator/TypingIndicator";
 import "../../assets/stylesheets/chat/chat.scss";
 import { fetchResponse } from "../../services";
-import { url, ChatProps, Roles, Statuses, Message } from '../../constants';
+import { ChatProps, Roles, Statuses, Message } from '../../models';
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const { initial, retrying, success, sending } = Statuses;
 const { user, assistant } = Roles;
 
@@ -18,11 +18,13 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
   const [typingIndicator, setTypingIndicator] = useState(false);
   const [status, setStatus] = useState(initial);
   const [retryMsgId, setRetryMsgId] = useState('');
-
-  const messagesForApiBody = messages.map(({ role, content }) => ({ role, content }));
+  const messagesForApiBody = messages.map(({ role, content }) => ({
+    role: role as Roles,
+    parts: [{ text: content }],
+  }));
   const apiRequestBody = useMemo(() => {
     return {
-      model: "gpt-3.5-turbo",
+      model: "gemini-2.5-flash",
       messages: messagesForApiBody,
     }
   }, [messagesForApiBody]);
@@ -73,7 +75,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
   const handleRetry = async (id: string) => {
     setStatus(retrying);
     setRetryMsgId(id);
-    fetchResponse(url, API_KEY, apiRequestBody, messages, setMessages, setTypingIndicator, setStatus);
+    fetchResponse(API_KEY, apiRequestBody, messages, setMessages, setTypingIndicator, setStatus);
   };
 
   useEffect(() => {
@@ -88,7 +90,7 @@ const Chat = ({ messages, setMessages, openWindow, shouldRetrieveBackup }: ChatP
 
   useEffect(() => {
     if (status === sending || status === retrying) {
-      fetchResponse(url, API_KEY, apiRequestBody, messages, setMessages, setTypingIndicator, setStatus);
+      fetchResponse(API_KEY, apiRequestBody, messages, setMessages, setTypingIndicator, setStatus);
     }
   }, [messages, setMessages, typingIndicator, setTypingIndicator, status, apiRequestBody]);
 

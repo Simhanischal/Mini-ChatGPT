@@ -1,6 +1,6 @@
 import CancelIcon from '@mui/icons-material/Cancel';
 import '../../../assets/stylesheets/home/WelcomeBubble.scss';
-import { WelcomeBubbleProps } from '../../../constants';
+import { WelcomeBubbleProps } from '../../../models';
 
 const WelcomeBubble = ({ welcomeMessage, closeWelcomeMessage, handleChangeIcon }: WelcomeBubbleProps) => {
   return (

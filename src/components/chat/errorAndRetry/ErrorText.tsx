@@ -1,7 +1,7 @@
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 import '../../../assets/stylesheets/chat/chatBubble.scss';
-import { ErrorTextProps } from '../../../constants';
+import { ErrorTextProps } from '../../../models';
 
 export const ErrorText = (props: ErrorTextProps) => (
   <div className="error-div">
